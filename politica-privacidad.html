@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080c14">
+  <title>Política de privacidad · AlphaTrade Pro</title>
+  <style>
+    :root { color-scheme: dark; --bg: #080c14; --card: rgba(18,26,43,.88); --text: #f8fafc; --muted: #cbd5e1; --line: #334155; --accent: #a78bfa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; padding: 32px 16px; color: var(--text); background: radial-gradient(ellipse at 12% 0%, rgba(126,91,190,.25), transparent 40%), radial-gradient(ellipse at 90% 15%, rgba(75,177,175,.18), transparent 38%), var(--bg); font: 16px/1.7 system-ui, "Segoe UI", sans-serif; }
+    main { max-width: 860px; margin: auto; padding: clamp(22px, 5vw, 48px); border: 1px solid var(--line); border-radius: 22px; background: var(--card); box-shadow: 0 24px 80px #0006; }
+    h1, h2 { line-height: 1.25; letter-spacing: -.025em; }
+    h1 { font-size: clamp(30px, 5vw, 44px); margin: 8px 0; }
+    h2 { margin-top: 32px; font-size: 21px; }
+    p, li { color: var(--muted); }
+    a { color: var(--accent); }
+    .eyebrow, .notice { color: var(--accent); }
+    .notice { border: 1px solid #8b5cf655; border-radius: 12px; padding: 14px 16px; background: #8b5cf611; }
+    .updated { color: #94a3b8; font-size: 14px; }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html">← Volver a AlphaTrade Pro</a>
+    <p class="eyebrow">ALPHATRADE PRO · PRIVACIDAD</p>
+    <h1>Política de privacidad</h1>
+    <p class="updated">Última actualización: 12 de noviembre de 2026</p>
+    <p class="notice"><strong>Antes de publicar:</strong> este proyecto no identifica a una empresa u operador ni proporciona un contacto de privacidad. Quien despliegue la plataforma debe añadir su nombre o razón social, correo de contacto, jurisdicción y plazos reales de conservación, y revisar este texto según las leyes aplicables. Esta información orienta sobre el código actual; no es asesoramiento jurídico.</p>
+
+    <h2>1. Quién trata tus datos</h2>
+    <p>AlphaTrade Pro es una aplicación web que puede ejecutarse como archivo local o en un servidor que configura quien la instala. No hay en este proyecto un servicio central de cuentas operado por AlphaTrade Pro. Si accedes a una instalación publicada o administrada por otra persona, esa persona y su proveedor de alojamiento pueden controlar el tratamiento de los datos. Contacto del operador: <strong>debe ser indicado por quien despliegue esta aplicación</strong>.</p>
+
+    <h2>2. Datos que puedes introducir</h2>
+    <ul>
+      <li>Un nombre de usuario o texto con formato de correo, y una contraseña para el acceso local. El navegador guarda un verificador de contraseña derivado con PBKDF2 y una sal; no existe recuperación central de cuentas.</li>
+      <li>Operaciones, instrumentos, fechas, resultados, comisiones, broker, estrategia y notas; también los datos que importes desde archivos CSV, Excel o JSON.</li>
+      <li>Mensajes que escribas al asistente, consultas de mercado y, si usas la integración opcional, tu clave de Gemini.</li>
+      <li>Preferencias básicas, como el tema visual y la sesión local.</li>
+    </ul>
+
+    <h2>3. Dónde se guardan y qué significa “sincronizar”</h2>
+    <p>Por defecto, las cuentas, operaciones, sesión y preferencias se guardan en el almacenamiento local del navegador (<code>localStorage</code>) de ese dispositivo. No se cifran allí como una base de datos protegida. Cerrar sesión no borra el historial ni los datos guardados; borrar los datos del sitio en el navegador sí puede eliminarlos permanentemente.</p>
+    <p>Cuando se ejecuta <code>server.js</code> o <code>server.py</code>, la aplicación intenta enviar el usuario y sus operaciones a <code>/api/sync</code>, que los guarda en <code>database_sync.json</code>. Este endpoint no implementa autenticación robusta, autorización por cuenta, cifrado de extremo a extremo ni controles de acceso adecuados para exposición pública. El servidor escucha en interfaces de red; úsalo solo en localhost o una red de confianza y <strong>no lo publiques en internet</strong>. Quien administre el servidor controla ese archivo, sus copias de seguridad y su eliminación. La etiqueta de sincronización no significa que exista una nube segura o una cuenta central.</p>
+
+    <h2>4. Servicios de terceros</h2>
+    <ul>
+      <li><strong>Google Gemini (opcional):</strong> si seleccionas Gemini y configuras una clave, el navegador envía a Google tu consulta, hasta los últimos 12 mensajes de conversación, métricas calculadas y hasta 20 operaciones recientes del período seleccionado, junto con el contexto de mercado cargado. Google trata esos datos según sus propias condiciones y políticas. La clave se guarda en el almacenamiento local del navegador y se envía al servicio de Google; no uses una clave que no estés dispuesto a exponer en ese dispositivo.</li>
+      <li><strong>Alpha Vantage (opcional):</strong> al cargar datos, el servidor reenvía al proveedor la clase de activo, símbolo o indicador y tipo de análisis. La clave de Alpha Vantage se configura en el entorno del servidor y no debe ponerse en el HTML ni compartirse en el chat. La aplicación no verifica la latencia ni los permisos de datos bursátiles.</li>
+      <li><strong>CDNJS/Cloudflare:</strong> la página descarga bibliotecas de interfaz desde CDNJS. El navegador se conecta a esos servidores y puede revelarles metadatos técnicos como la dirección IP, conforme a sus políticas.</li>
+    </ul>
+    <p>El proyecto no incorpora deliberadamente cookies publicitarias ni herramientas de analítica; el alojamiento, los CDN, el navegador o servicios de terceros pueden utilizar sus propias tecnologías y registros.</p>
+
+    <h2>5. Archivos, exportaciones y decisiones del usuario</h2>
+    <p>La lectura de archivos importados y la creación de Excel/PDF se realizan en el navegador. Los archivos que exportes quedan bajo tu control; compartirlos o guardarlos en servicios externos depende de ti. Una vez importados, los registros quedan almacenados como se describe arriba. No incluyas contraseñas de brokers, datos de pago ni información personal innecesaria en notas o archivos.</p>
+
+    <h2>6. Conservación y eliminación</h2>
+    <p>El almacenamiento local permanece hasta que borres los datos del sitio o el navegador los elimine. Los datos sincronizados permanecen en el archivo del servidor hasta que su administrador los borre; este proyecto no configura vencimiento ni borrado automático. Las copias exportadas, respaldos y datos ya enviados a proveedores externos deben eliminarse por separado, de acuerdo con las herramientas y políticas de cada servicio.</p>
+
+    <h2>7. Seguridad y menores</h2>
+    <p>La aplicación es una herramienta personal y de demostración, no un servicio diseñado o certificado para custodiar información financiera sensible. La sincronización no es adecuada para redes públicas o despliegues abiertos. El operador de cada instalación debe proteger el dispositivo, restringir el acceso al servidor y establecer sus propias copias de seguridad. La plataforma no está dirigida a menores de edad.</p>
+
+    <h2>8. Cambios y consultas</h2>
+    <p>Quien despliegue una copia debe mantener esta política alineada con su configuración real, proveedores, jurisdicción y prácticas de conservación. Para consultas o solicitudes sobre datos, contacta al operador de esa instalación; su información de contacto debe añadirse antes de publicar.</p>
+
+    <nav aria-label="Otros documentos">
+      <a href="terminos-uso.html">Términos de uso</a>
+      <a href="index.html">Volver a la plataforma</a>
+    </nav>
+  </main>
+</body>
+</html>
